@@ -1,15 +1,13 @@
-"use client";
-
 import { useState } from 'react';
 
-const Home = () => {
+export default function Home() {
   const [posts, setPosts] = useState([
     { id: 1, text: 'Hello, world!', likes: 0, comments: [] },
     { id: 2, text: 'This is a sample post', likes: 0, comments: [] },
   ]);
   const [newPost, setNewPost] = useState('');
   const [comment, setComment] = useState('');
-  const [selectedPost, setSelectedPost] = useState<number | null>(null);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   const handlePost = () => {
     if (newPost.trim()) {
@@ -18,7 +16,7 @@ const Home = () => {
     }
   };
 
-  const handleLike = (id: number) => {
+  const handleLike = (id) => {
     setPosts(
       posts.map((post) =>
         post.id === id ? { ...post, likes: post.likes + 1 } : post
@@ -26,7 +24,7 @@ const Home = () => {
     );
   };
 
-  const handleComment = (id: number) => {
+  const handleComment = (id) => {
     if (comment.trim()) {
       setPosts(
         posts.map((post) =>
@@ -88,10 +86,8 @@ const Home = () => {
                   Comment
                 </button>
                 <div className="comments mt-4">
-                  {post.comments.map((commentText, index) => (
-                    <p key={index} className="text-lg">
-                      {commentText}
-                    </p>
+                  {post.comments.map((c, index) => (
+                    <p key={index} className="text-lg">{c}</p>
                   ))}
                 </div>
               </div>
@@ -101,6 +97,4 @@ const Home = () => {
       </div>
     </div>
   );
-};
-
-export default Home;
+}
