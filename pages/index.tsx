@@ -89,7 +89,9 @@ const Home = () => {
                 </button>
                 <div className="comments mt-4">
                   {post.comments.map((commentText, index) => (
-                    <p key={index} className="text-lg">{commentText}</p>
+                    <p key={index} className="text-lg">
+                      {commentText}
+                    </p>
                   ))}
                 </div>
               </div>
