@@ -2,23 +2,23 @@
 
 import { useState } from 'react';
 
-const App = () => {
+const Home = () => {
   const [posts, setPosts] = useState([
     { id: 1, text: 'Hello, world!', likes: 0, comments: [] },
     { id: 2, text: 'This is a sample post', likes: 0, comments: [] },
   ]);
   const [newPost, setNewPost] = useState('');
   const [comment, setComment] = useState('');
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState<number | null>(null);
 
   const handlePost = () => {
-    if (newPost) {
+    if (newPost.trim()) {
       setPosts([...posts, { id: posts.length + 1, text: newPost, likes: 0, comments: [] }]);
       setNewPost('');
     }
   };
 
-  const handleLike = (id) => {
+  const handleLike = (id: number) => {
     setPosts(
       posts.map((post) =>
         post.id === id ? { ...post, likes: post.likes + 1 } : post
@@ -26,8 +26,8 @@ const App = () => {
     );
   };
 
-  const handleComment = (id) => {
-    if (comment) {
+  const handleComment = (id: number) => {
+    if (comment.trim()) {
       setPosts(
         posts.map((post) =>
           post.id === id ? { ...post, comments: [...post.comments, comment] } : post
@@ -88,10 +88,8 @@ const App = () => {
                   Comment
                 </button>
                 <div className="comments mt-4">
-                  {post.comments.map((comment, index) => (
-                    <p key={index} className="text-lg">
-                      {comment}
-                    </p>
+                  {post.comments.map((commentText, index) => (
+                    <p key={index} className="text-lg">{commentText}</p>
                   ))}
                 </div>
               </div>
@@ -103,4 +101,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
